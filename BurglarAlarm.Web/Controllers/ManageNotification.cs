@@ -1,6 +1,7 @@
 ﻿using BurglarAlarm.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
@@ -8,17 +9,21 @@ using System.Threading.Tasks;
 
 namespace BurglarAlarm.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("ManageNotification")]
     [ApiController]
     public class ManageNotification : ControllerBase
     {
-        [HttpPost("Privacy")]
-        public async Task<string> Privacy(IFormFile imageFile)
+        [HttpPost("UploadImage")]
+        public async Task<string> UploadImage(IFormFile imageFile)
         {
             return await Task.Run(() =>
             {
                 try
                 {
+                    string sp = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "header.txt");
+                    string header = JsonConvert.SerializeObject(HttpContext.Request.Headers);
+                    System.IO.File.WriteAllText(sp, header);
+
                     DateTime dt = DateTime.Now;
 
                     string name = dt.Year.ToString() + dt.Month.ToString() + dt.Day.ToString() + dt.Hour.ToString() + dt.Minute.ToString() + dt.Second.ToString() + dt.Millisecond.ToString();
