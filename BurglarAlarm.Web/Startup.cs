@@ -28,7 +28,6 @@ namespace BurglarAlarm.Web
         {
             WarningListModel.ListModels.Add(new WarningModel
             {
-                Flag = false,
                 StartDate = DateTime.Now.AddDays(-1),
                 Serial = "d6ac5b88-35e9-461f-b911-2f68d4cb9c44"
             });

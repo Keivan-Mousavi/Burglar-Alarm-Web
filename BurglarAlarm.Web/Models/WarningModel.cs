@@ -8,7 +8,5 @@ namespace BurglarAlarm.Web.Models
         public DateTime StartDate { get; set; }
 
         public string Serial { get; set; }
-
-        public bool Flag { get; set; }
     }
 }

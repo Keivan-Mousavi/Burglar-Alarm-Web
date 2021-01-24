@@ -20,24 +20,31 @@ namespace BurglarAlarm.Web.Controllers
             {
                 try
                 {
-                    string sp = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "header.txt");
-                    string header = JsonConvert.SerializeObject(HttpContext.Request.Headers);
-                    System.IO.File.WriteAllText(sp, header);
+                    string serial = HttpContext.Request.Headers["Serial"];
 
-                    DateTime dt = DateTime.Now;
+                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
 
-                    string name = dt.Year.ToString() + dt.Month.ToString() + dt.Day.ToString() + dt.Hour.ToString() + dt.Minute.ToString() + dt.Second.ToString() + dt.Millisecond.ToString();
-
-                    string ImageName = name + Path.GetExtension(imageFile.FileName);
-
-                    string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", ImageName);
-
-                    using (var stream = new FileStream(SavePath, FileMode.Create))
+                    if (query.StartDate >= DateTime.Now)
                     {
-                        imageFile.CopyTo(stream);
-                    }
+                        DateTime dt = DateTime.Now;
 
-                    return "Success";
+                        string name = dt.Year.ToString() + dt.Month.ToString() + dt.Day.ToString() + dt.Hour.ToString() + dt.Minute.ToString() + dt.Second.ToString() + dt.Millisecond.ToString();
+
+                        string ImageName = name + Path.GetExtension(imageFile.FileName);
+
+                        string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", ImageName);
+
+                        using (var stream = new FileStream(SavePath, FileMode.Create))
+                        {
+                            imageFile.CopyTo(stream);
+                        }
+
+                        return "Success";
+                    }
+                    else
+                    {
+                        return "Faild";
+                    }
                 }
                 catch
                 {
@@ -58,8 +65,6 @@ namespace BurglarAlarm.Web.Controllers
                     if (query.Serial == serial)
                     {
                         query.StartDate = DateTime.Now.AddMinutes(10);
-                        query.Flag = true;
-
                         return true;
                     }
                     else
