@@ -78,5 +78,34 @@ namespace BurglarAlarm.Web.Controllers
                 }
             });
         }
+
+        [HttpGet("ControllerTV")]
+        public async Task<string> ControllerTV(string serial)
+        {
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+
+                    var dt = DateTime.Now;
+
+                    if (query.Serial == serial && query.StartDate >= dt)
+                    {
+                       
+                    }
+                    else
+                    {
+                        
+                    }
+
+                    return "";
+                }
+                catch (Exception ex)
+                {
+                    return "";
+                }
+            });
+        }
     }
 }
