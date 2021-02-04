@@ -1,7 +1,6 @@
 ﻿using BurglarAlarm.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
@@ -92,18 +91,39 @@ namespace BurglarAlarm.Web.Controllers
 
                     if (query.Serial == serial && query.StartDate >= dt)
                     {
-                       
-                    }
-                    else
-                    {
-                        
+                        var lcm = ListControllerModel.ListController.FirstOrDefault(f => f.Serial == serial);
+                        ListControllerModel.ListController.Remove(lcm);
+
+                        return lcm.SendNEC;
                     }
 
-                    return "";
+                    return "not_find_this_device";
                 }
                 catch (Exception ex)
                 {
-                    return "";
+                    return "error";
+                }
+            });
+        }
+
+        [HttpGet("AddControllerTV")]
+        public async Task<bool> AddControllerTV(string serial, string sendNEC)
+        {
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    ListControllerModel.ListController.Add(new ControllerModel
+                    {
+                        SendNEC = sendNEC,
+                        Serial = serial
+                    });
+
+                    return true;
+                }
+                catch(Exception ex)
+                {
+                    return false;
                 }
             });
         }
