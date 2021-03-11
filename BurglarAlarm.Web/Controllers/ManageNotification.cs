@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BurglarAlarm.Web.Controllers
@@ -25,18 +26,20 @@ namespace BurglarAlarm.Web.Controllers
 
                     if (query.StartDate >= DateTime.Now)
                     {
-                        DateTime dt = DateTime.Now;
+                        OnlineModel.Frame.Append(Convert.ToBase64String(((MemoryStream)imageFile.OpenReadStream()).ToArray()));
 
-                        string name = dt.Year.ToString() + dt.Month.ToString() + dt.Day.ToString() + dt.Hour.ToString() + dt.Minute.ToString() + dt.Second.ToString() + dt.Millisecond.ToString();
+                        //DateTime dt = DateTime.Now;
 
-                        string ImageName = name + Path.GetExtension(imageFile.FileName);
+                        //string name = dt.Year.ToString() + dt.Month.ToString() + dt.Day.ToString() + dt.Hour.ToString() + dt.Minute.ToString() + dt.Second.ToString() + dt.Millisecond.ToString();
 
-                        string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", ImageName);
+                        //string ImageName = name + Path.GetExtension(imageFile.FileName);
 
-                        using (var stream = new FileStream(SavePath, FileMode.Create))
-                        {
-                            imageFile.CopyTo(stream);
-                        }
+                        //string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", ImageName);
+
+                        //using (var stream = new FileStream(SavePath, FileMode.Create))
+                        //{
+                        //    imageFile.CopyTo(stream);
+                        //}
 
                         return "Success";
                     }
@@ -47,7 +50,23 @@ namespace BurglarAlarm.Web.Controllers
                 }
                 catch
                 {
-                    return "Faild";
+                    return "Error";
+                }
+            });
+        }
+
+        [HttpGet("ShowFrame")]
+        public async Task<string> ShowFrame()
+        {
+            return await Task.Run(() =>
+            {
+                if (OnlineModel.Frame != null)
+                {
+                    return OnlineModel.Frame.ToString();
+                }
+                else
+                {
+                    return default;
                 }
             });
         }
@@ -121,7 +140,7 @@ namespace BurglarAlarm.Web.Controllers
 
                     return true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return false;
                 }
