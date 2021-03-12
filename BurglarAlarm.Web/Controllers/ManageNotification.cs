@@ -83,10 +83,42 @@ namespace BurglarAlarm.Web.Controllers
                 {
                     var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
 
-                    if (query.Serial == serial)
+                    if (query != null)
                     {
                         query.StartDate = DateTime.Now.AddMinutes(10);
                         return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            });
+        }
+
+        [HttpGet("CheckUploadImage")]
+        public async Task<bool> CheckUploadImage(string serial)
+        {
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+
+                    if (query != null)
+                    {
+                        if (query.StartDate >= DateTime.Now)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
