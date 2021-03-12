@@ -1,10 +1,9 @@
-﻿using BurglarAlarm.Web.Models;
+﻿using BurglarAlarm.Web.Component;
+using BurglarAlarm.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BurglarAlarm.Web.Controllers
@@ -26,23 +25,8 @@ namespace BurglarAlarm.Web.Controllers
 
                     if (query.StartDate >= DateTime.Now)
                     {
-                        using (var memoryStream = ((MemoryStream)imageFile.OpenReadStream()))
-                        {
-                            OnlineModel.Frame.Append(Convert.ToBase64String(memoryStream.ToArray()));
-                        }
-
-                        //DateTime dt = DateTime.Now;
-
-                        //string name = dt.Year.ToString() + dt.Month.ToString() + dt.Day.ToString() + dt.Hour.ToString() + dt.Minute.ToString() + dt.Second.ToString() + dt.Millisecond.ToString();
-
-                        //string ImageName = name + Path.GetExtension(imageFile.FileName);
-
-                        //string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", ImageName);
-
-                        //using (var stream = new FileStream(SavePath, FileMode.Create))
-                        //{
-                        //    imageFile.CopyTo(stream);
-                        //}
+                        OnlineModel.Frame.Clear();
+                        OnlineModel.Frame.Append(imageFile.OpenReadStream().ConvertToBase64());
 
                         return "Success";
                     }
@@ -51,8 +35,9 @@ namespace BurglarAlarm.Web.Controllers
                         return "Faild";
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+
                     return "Error";
                 }
             });
