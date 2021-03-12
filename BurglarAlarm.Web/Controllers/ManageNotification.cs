@@ -26,7 +26,10 @@ namespace BurglarAlarm.Web.Controllers
 
                     if (query.StartDate >= DateTime.Now)
                     {
-                        OnlineModel.Frame.Append(Convert.ToBase64String(((MemoryStream)imageFile.OpenReadStream()).ToArray()));
+                        using (var memoryStream = ((MemoryStream)imageFile.OpenReadStream()))
+                        {
+                            OnlineModel.Frame.Append(Convert.ToBase64String(memoryStream.ToArray()));
+                        }
 
                         //DateTime dt = DateTime.Now;
 
