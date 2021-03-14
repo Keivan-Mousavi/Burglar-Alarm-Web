@@ -1,0 +1,9 @@
+﻿@model string
+@{
+    ViewData["Title"] = "ShowFrameIndex";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<div class="FullScrean">
+    <img id="imageFrame" class="FullScrean" src="data:image/jpg;base64, @Model" />
+</div>
