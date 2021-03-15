@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace BurglarAlarm.Web.Controllers
 {
-    [Route("ManageNotification")]
-    [ApiController]
     public class ManageNotification : ControllerBase
     {
-        [HttpPost("UploadImage")]
+        [HttpPost(Name ="UploadImage")]
         public async Task<string> UploadImage(IFormFile imageFile)
         {
             return await Task.Run(() =>
@@ -43,7 +41,7 @@ namespace BurglarAlarm.Web.Controllers
             });
         }
 
-        [HttpGet("ShowFrame")]
+        [HttpGet(Name = "ShowFrame")]
         public async Task<string> ShowFrame()
         {
             return await Task.Run(() =>
@@ -59,7 +57,7 @@ namespace BurglarAlarm.Web.Controllers
             });
         }
 
-        [HttpGet("CheckCamera")]
+        [HttpGet(Name = "CheckCamera")]
         public async Task<bool> CheckCamera(string serial)
         {
             return await Task.Run(() =>
@@ -85,7 +83,7 @@ namespace BurglarAlarm.Web.Controllers
             });
         }
 
-        [HttpGet("CheckUploadImage")]
+        [HttpGet(Name = "CheckUploadImage")]
         public async Task<bool> CheckUploadImage(string serial)
         {
             return await Task.Run(() =>
@@ -117,7 +115,7 @@ namespace BurglarAlarm.Web.Controllers
             });
         }
 
-        [HttpGet("ControllerTV")]
+        [HttpGet(Name = "ControllerTV")]
         public async Task<string> ControllerTV(string serial)
         {
             return await Task.Run(() =>
@@ -145,7 +143,7 @@ namespace BurglarAlarm.Web.Controllers
             });
         }
 
-        [HttpGet("AddControllerTV")]
+        [HttpGet(Name = "AddControllerTV")]
         public async Task<bool> AddControllerTV(string serial, string sendNEC)
         {
             return await Task.Run(() =>

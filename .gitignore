@@ -2,8 +2,14 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
 /.vs
-/BurglarAlarm.Web/bin/Debug/netcoreapp3.1
-/BurglarAlarm.Web/obj
-/BurglarAlarm.Web/bin/Release/netcoreapp3.1
-/BurglarAlarm.Web/.config
