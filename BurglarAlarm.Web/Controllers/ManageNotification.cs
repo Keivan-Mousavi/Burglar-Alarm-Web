@@ -10,7 +10,7 @@ namespace BurglarAlarm.Web.Controllers
 {
     public class ManageNotification : ControllerBase
     {
-        [HttpPost(Name ="UploadImage")]
+        [HttpPost(Name = "UploadImage")]
         public async Task<string> UploadImage(IFormFile imageFile)
         {
             return await Task.Run(() =>
@@ -164,5 +164,60 @@ namespace BurglarAlarm.Web.Controllers
                 }
             });
         }
+
+        //private Task SendNotification()
+        //{
+        //    try
+        //    {
+        //        var applicationID = "AAAAga5Ng74:APA91bFuHTbk7Nown4COO2agndO3rs_fd_PAwSZKlIcqpfu7llf9_9GSp8F1vRLBkeGoUOYcans54fWP3MW_QsraD6Ne1Nj4KIqCZ8equArzI2tDT44pUhHRGWE1IDFV2-IMiJYcc2C8";
+        //        var senderId = "556975096766";
+
+        //        string deviceId = item;
+
+        //        WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
+        //        tRequest.Method = "post";
+        //        tRequest.ContentType = "application/json";
+
+        //        var data = new
+        //        {
+        //            to = deviceId,
+        //            notification = new
+        //            {
+        //                body = Body,
+        //                title = Title,
+        //                icon = "icon"
+        //            }
+        //        };
+
+        //        var json = JsonConvert.SerializeObject(data);
+
+        //        Byte[] byteArray = Encoding.UTF8.GetBytes(json);
+
+        //        tRequest.Headers.Add(string.Format("Authorization: key={0}", applicationID));
+        //        tRequest.Headers.Add(string.Format("Sender: id={0}", senderId));
+        //        tRequest.ContentLength = byteArray.Length;
+
+        //        using (Stream dataStream = tRequest.GetRequestStream())
+        //        {
+        //            dataStream.Write(byteArray, 0, byteArray.Length);
+
+        //            using (WebResponse tResponse = tRequest.GetResponse())
+        //            {
+        //                using (Stream dataStreamResponse = tResponse.GetResponseStream())
+        //                {
+        //                    using (StreamReader tReader = new StreamReader(dataStreamResponse))
+        //                    {
+        //                        String sResponseFromServer = tReader.ReadToEnd();
+        //                        string str = sResponseFromServer;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //}
     }
 }
