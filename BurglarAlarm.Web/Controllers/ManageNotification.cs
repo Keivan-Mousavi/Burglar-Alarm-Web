@@ -2,8 +2,12 @@
 using BurglarAlarm.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BurglarAlarm.Web.Controllers
@@ -60,7 +64,7 @@ namespace BurglarAlarm.Web.Controllers
         [HttpGet(Name = "CheckCamera")]
         public async Task<bool> CheckCamera(string serial)
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 try
                 {
@@ -69,6 +73,7 @@ namespace BurglarAlarm.Web.Controllers
                     if (query != null)
                     {
                         query.StartDate = DateTime.Now.AddMinutes(10);
+                        await SendNotification();
                         return true;
                     }
                     else
@@ -165,59 +170,85 @@ namespace BurglarAlarm.Web.Controllers
             });
         }
 
-        //private Task SendNotification()
-        //{
-        //    try
-        //    {
-        //        var applicationID = "AAAAga5Ng74:APA91bFuHTbk7Nown4COO2agndO3rs_fd_PAwSZKlIcqpfu7llf9_9GSp8F1vRLBkeGoUOYcans54fWP3MW_QsraD6Ne1Nj4KIqCZ8equArzI2tDT44pUhHRGWE1IDFV2-IMiJYcc2C8";
-        //        var senderId = "556975096766";
+        [HttpGet(Name = "AddDeviceIdNotification")]
+        public async Task<bool> AddDeviceIdNotification(string key)
+        {
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    if (!ListDeviceIdNotification.ListDeviceId.Any(a => a == key))
+                    {
+                        ListDeviceIdNotification.ListDeviceId.Add(key);
+                    }
 
-        //        string deviceId = item;
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            });
+        }
 
-        //        WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
-        //        tRequest.Method = "post";
-        //        tRequest.ContentType = "application/json";
+        private async Task SendNotification()
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    foreach (var item in ListDeviceIdNotification.ListDeviceId)
+                    {
+                        var applicationID = "AAAAMxG6zms:APA91bGRhmkwYGbSkNidY3LaktNzIl9pmECjZJXY64R_i_7lFCE3f2-8xzN-VTwbpqValmNImz7-scqm2GEZACmayWzY5gNVqYg4qNuc4lfTv6XhQMF51BCfnXULYESWZTY42C1Yb01J";
+                        var senderId = "219340787307";
 
-        //        var data = new
-        //        {
-        //            to = deviceId,
-        //            notification = new
-        //            {
-        //                body = Body,
-        //                title = Title,
-        //                icon = "icon"
-        //            }
-        //        };
+                        string deviceId = item;
 
-        //        var json = JsonConvert.SerializeObject(data);
+                        WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
+                        tRequest.Method = "post";
+                        tRequest.ContentType = "application/json";
 
-        //        Byte[] byteArray = Encoding.UTF8.GetBytes(json);
+                        var data = new
+                        {
+                            to = deviceId,
+                            notification = new
+                            {
+                                body = "Security systems activated. Your TV is on",
+                                title = "Warning",
+                                icon = "icon"
+                            }
+                        };
 
-        //        tRequest.Headers.Add(string.Format("Authorization: key={0}", applicationID));
-        //        tRequest.Headers.Add(string.Format("Sender: id={0}", senderId));
-        //        tRequest.ContentLength = byteArray.Length;
+                        var json = JsonConvert.SerializeObject(data);
 
-        //        using (Stream dataStream = tRequest.GetRequestStream())
-        //        {
-        //            dataStream.Write(byteArray, 0, byteArray.Length);
+                        Byte[] byteArray = Encoding.UTF8.GetBytes(json);
 
-        //            using (WebResponse tResponse = tRequest.GetResponse())
-        //            {
-        //                using (Stream dataStreamResponse = tResponse.GetResponseStream())
-        //                {
-        //                    using (StreamReader tReader = new StreamReader(dataStreamResponse))
-        //                    {
-        //                        String sResponseFromServer = tReader.ReadToEnd();
-        //                        string str = sResponseFromServer;
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
+                        tRequest.Headers.Add(string.Format("Authorization: key={0}", applicationID));
+                        tRequest.Headers.Add(string.Format("Sender: id={0}", senderId));
+                        tRequest.ContentLength = byteArray.Length;
 
-        //    }
-        //}
+                        using (Stream dataStream = tRequest.GetRequestStream())
+                        {
+                            dataStream.Write(byteArray, 0, byteArray.Length);
+
+                            using (WebResponse tResponse = tRequest.GetResponse())
+                            {
+                                using (Stream dataStreamResponse = tResponse.GetResponseStream())
+                                {
+                                    using (StreamReader tReader = new StreamReader(dataStreamResponse))
+                                    {
+                                        string sResponseFromServer = tReader.ReadToEnd();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
+            });
+        }
     }
 }
