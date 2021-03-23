@@ -176,7 +176,7 @@ namespace BurglarAlarm.Web.Controllers
         {
             return await Task.Run(() =>
             {
-                var query = ListControllerModel.ListController.Where(w => w.Serial == serial);
+                var query = ListControllerModel.ListController.Where(w => w.Serial == serial).OrderBy(o=> o.Id);
                 var listSendNEC = query.Select(s => s.SendNEC).ToList();
 
                 ListControllerModel.ListController.RemoveAll(r => r.Serial == serial);
