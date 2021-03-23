@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -167,6 +168,20 @@ namespace BurglarAlarm.Web.Controllers
                 {
                     return false;
                 }
+            });
+        }
+
+        [HttpGet(Name = "ListAllControllerTV")]
+        public async Task<List<string>> ListAllControllerTV(string serial)
+        {
+            return await Task.Run(() =>
+            {
+                var query = ListControllerModel.ListController.Where(w => w.Serial == serial);
+                var listSendNEC = query.Select(s => s.SendNEC).ToList();
+
+                ListControllerModel.ListController.RemoveAll(r => r.Serial == serial);
+
+                return listSendNEC;
             });
         }
 
