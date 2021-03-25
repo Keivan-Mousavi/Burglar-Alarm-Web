@@ -172,16 +172,15 @@ namespace BurglarAlarm.Web.Controllers
         }
 
         [HttpGet(Name = "ListAllControllerTV")]
-        public async Task<List<string>> ListAllControllerTV(string serial)
+        public async Task<string> ListAllControllerTV(string serial)
         {
             return await Task.Run(() =>
             {
-                var query = ListControllerModel.ListController.Where(w => w.Serial == serial).OrderBy(o=> o.Id);
-                var listSendNEC = query.Select(s => s.SendNEC).ToList();
+                var query = ListControllerModel.ListController.Where(w => w.Serial == serial).OrderBy(o=> o.Id).FirstOrDefault();
 
-                ListControllerModel.ListController.RemoveAll(r => r.Serial == serial);
+                ListControllerModel.ListController.Remove(query);
 
-                return listSendNEC;
+                return query?.SendNEC;
             });
         }
 
