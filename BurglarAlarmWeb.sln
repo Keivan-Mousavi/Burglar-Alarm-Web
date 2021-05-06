@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarm.Web", "BurglarAlarm.Web\BurglarAlarm.Web.csproj", "{54160BC7-7B1E-4959-ABA8-CB86D579C3AC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarmWebML.Model", "BurglarAlarmWebML.Model\BurglarAlarmWebML.Model.csproj", "{2237BF43-CFBD-444E-94D1-3115624394AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarmWebML.ConsoleApp", "BurglarAlarmWebML.ConsoleApp\BurglarAlarmWebML.ConsoleApp.csproj", "{030BF4AF-6EB2-45F1-A488-8E883762C3AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{54160BC7-7B1E-4959-ABA8-CB86D579C3AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54160BC7-7B1E-4959-ABA8-CB86D579C3AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54160BC7-7B1E-4959-ABA8-CB86D579C3AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2237BF43-CFBD-444E-94D1-3115624394AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2237BF43-CFBD-444E-94D1-3115624394AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2237BF43-CFBD-444E-94D1-3115624394AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2237BF43-CFBD-444E-94D1-3115624394AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{030BF4AF-6EB2-45F1-A488-8E883762C3AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{030BF4AF-6EB2-45F1-A488-8E883762C3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{030BF4AF-6EB2-45F1-A488-8E883762C3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{030BF4AF-6EB2-45F1-A488-8E883762C3AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
