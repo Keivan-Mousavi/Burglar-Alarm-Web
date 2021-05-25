@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarmWebML.Model", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarmWebML.ConsoleApp", "BurglarAlarmWebML.ConsoleApp\BurglarAlarmWebML.ConsoleApp.csproj", "{030BF4AF-6EB2-45F1-A488-8E883762C3AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurglarAlarm.FaceDetection", "BurglarAlarm.FaceDetection\BurglarAlarm.FaceDetection.csproj", "{5FB1E7AB-EC35-4A58-BD50-4D208DF034E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{030BF4AF-6EB2-45F1-A488-8E883762C3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{030BF4AF-6EB2-45F1-A488-8E883762C3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{030BF4AF-6EB2-45F1-A488-8E883762C3AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FB1E7AB-EC35-4A58-BD50-4D208DF034E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FB1E7AB-EC35-4A58-BD50-4D208DF034E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FB1E7AB-EC35-4A58-BD50-4D208DF034E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FB1E7AB-EC35-4A58-BD50-4D208DF034E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
