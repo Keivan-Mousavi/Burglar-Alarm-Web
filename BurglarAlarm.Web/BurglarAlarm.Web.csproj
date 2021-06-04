@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
-    <Folder Include="wwwroot\img\" />
+    <ProjectReference Include="..\BurglarAlarm.FaceDetection\BurglarAlarm.FaceDetection.csproj" />
   </ItemGroup>
 
 </Project>
