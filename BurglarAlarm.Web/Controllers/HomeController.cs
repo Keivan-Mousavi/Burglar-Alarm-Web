@@ -33,7 +33,7 @@ namespace BurglarAlarm.Web.Controllers
             {
                 if (OnlineModel.Frame != null)
                 {
-                    ViewData.Model =  OnlineModel.Frame.ToString();
+                    ViewData.Model = OnlineModel.Frame.ToString();
                 }
 
                 return View();
@@ -43,10 +43,7 @@ namespace BurglarAlarm.Web.Controllers
         [HttpGet]
         public ActionResult TestFaceDetection()
         {
-            // FileStream file = new FileStream(hostingEnvironment.WebRootPath + "/img/123456.jpg", FileMode.Open);
-
-            var file = Image.FromFile(hostingEnvironment.WebRootPath + "/img/123456.jpg");
-            BurglarAlarm.FaceDetection.FaceDetectionEmguCV.DetectedMultiFace(file);
+            BurglarAlarm.FaceDetection.FaceDetectionEmguCV.DetectedMultiFace(hostingEnvironment.WebRootPath + "\\img\\0.jpg");
 
             return Json("Success");
         }
