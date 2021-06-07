@@ -15,4 +15,10 @@
     <ProjectReference Include="..\BurglarAlarm.FaceDetection\BurglarAlarm.FaceDetection.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="haarcascade_frontalface_alt_tree.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
