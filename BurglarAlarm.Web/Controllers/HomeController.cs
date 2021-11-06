@@ -1,13 +1,6 @@
-﻿using BurglarAlarm.Web.Models;
+﻿using BurglarAlarm.Domain.Common;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BurglarAlarm.Web.Controllers

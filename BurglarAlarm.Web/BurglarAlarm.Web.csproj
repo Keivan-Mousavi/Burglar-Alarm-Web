@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BurglarAlarm.Domain\BurglarAlarm.Domain.csproj" />
     <ProjectReference Include="..\BurglarAlarm.FaceDetection\BurglarAlarm.FaceDetection.csproj" />
   </ItemGroup>
 

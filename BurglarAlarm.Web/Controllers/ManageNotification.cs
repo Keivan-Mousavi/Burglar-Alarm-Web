@@ -1,10 +1,9 @@
-﻿using BurglarAlarm.Web.Component;
-using BurglarAlarm.Web.Models;
+﻿using BurglarAlarm.Domain.Common;
+using BurglarAlarm.Web.Component;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;

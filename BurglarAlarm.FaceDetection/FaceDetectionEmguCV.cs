@@ -1,5 +1,6 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Structure;
+using System;
 using System.Drawing;
 using System.IO;
 
@@ -29,6 +30,16 @@ namespace BurglarAlarm.FaceDetection
                     }
                 }
             }
+
+            var ii = ImageToByte(bitmap);
+
+            var sb = Convert.ToBase64String(ii);
+        }
+
+        public static byte[] ImageToByte(Image img)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
     }
 }
