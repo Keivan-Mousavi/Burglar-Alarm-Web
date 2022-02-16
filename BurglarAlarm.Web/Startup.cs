@@ -1,4 +1,4 @@
-using BurglarAlarm.Web.Models;
+using BurglarAlarm.Domain.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
