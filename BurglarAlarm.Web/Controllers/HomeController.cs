@@ -7,11 +7,11 @@ namespace BurglarAlarm.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-        public HomeController(IHostingEnvironment hostingEnvironment)
+        public HomeController(IWebHostEnvironment webHostEnvironment)
         {
-            this.hostingEnvironment = hostingEnvironment;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -36,7 +36,7 @@ namespace BurglarAlarm.Web.Controllers
         [HttpGet]
         public ActionResult TestFaceDetection()
         {
-            BurglarAlarm.FaceDetection.FaceDetectionEmguCV.DetectedMultiFace(hostingEnvironment.WebRootPath + "\\img\\0.jpg");
+            BurglarAlarm.FaceDetection.FaceDetectionEmguCV.DetectedMultiFace(webHostEnvironment.WebRootPath + "\\img\\0.jpg");
 
             return Json("Success");
         }

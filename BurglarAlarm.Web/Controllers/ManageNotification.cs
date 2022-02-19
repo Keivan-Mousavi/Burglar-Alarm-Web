@@ -1,14 +1,9 @@
 ﻿using BurglarAlarm.Domain.Common;
 using BurglarAlarm.Web.Component;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace BurglarAlarm.Web.Controllers
 {
@@ -175,7 +170,7 @@ namespace BurglarAlarm.Web.Controllers
         {
             return await Task.Run(() =>
             {
-                var query = ListControllerModel.ListController.Where(w => w.Serial == serial).OrderBy(o=> o.Id).FirstOrDefault();
+                var query = ListControllerModel.ListController.Where(w => w.Serial == serial).OrderBy(o => o.Id).FirstOrDefault();
 
                 ListControllerModel.ListController.Remove(query);
 
@@ -232,7 +227,7 @@ namespace BurglarAlarm.Web.Controllers
                             }
                         };
 
-                        var json = JsonConvert.SerializeObject(data);
+                        var json = JsonSerializer.Serialize(data);
 
                         Byte[] byteArray = Encoding.UTF8.GetBytes(json);
 

@@ -2,24 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <UserSecretsId>903d4bc5-8a94-41ad-936e-88f53f0f9be2</UserSecretsId>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BurglarAlarm.Domain\BurglarAlarm.Domain.csproj" />
     <ProjectReference Include="..\BurglarAlarm.FaceDetection\BurglarAlarm.FaceDetection.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="haarcascade_frontalface_alt_tree.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
