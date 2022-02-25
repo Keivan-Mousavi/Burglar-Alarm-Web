@@ -19,7 +19,7 @@ namespace BurglarAlarm.Web.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpGet("ShowFrameIndex")]
         public async Task<ActionResult> ShowFrameIndex()
         {
             return await Task.Run(() =>
