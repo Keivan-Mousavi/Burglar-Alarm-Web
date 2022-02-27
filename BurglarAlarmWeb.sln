@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarm.FaceDetection"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarm.Domain", "BurglarAlarm.Domain\BurglarAlarm.Domain.csproj", "{AC445C25-26F2-4ED4-9063-5997F7F6E3F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurglarAlarm.Web", "BurglarAlarm.Web\BurglarAlarm.Web.csproj", "{813A0345-E1F9-4491-A0E4-62380FF3638F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurglarAlarm.Web.Server", "BurglarAlarm.Web\Server\BurglarAlarm.Web.Server.csproj", "{DA321646-C0CD-4D88-A41F-E2C6C7368DC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurglarAlarm.Web.Client", "BurglarAlarm.Web\Client\BurglarAlarm.Web.Client.csproj", "{628BA874-9204-4C89-A84F-2561117A3CC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurglarAlarm.Service", "BurglarAlarm.Service\BurglarAlarm.Service.csproj", "{7A3B5D2E-CC6D-4571-875F-57FE3D706478}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +39,18 @@ Global
 		{AC445C25-26F2-4ED4-9063-5997F7F6E3F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC445C25-26F2-4ED4-9063-5997F7F6E3F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC445C25-26F2-4ED4-9063-5997F7F6E3F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{813A0345-E1F9-4491-A0E4-62380FF3638F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{813A0345-E1F9-4491-A0E4-62380FF3638F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{813A0345-E1F9-4491-A0E4-62380FF3638F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{813A0345-E1F9-4491-A0E4-62380FF3638F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA321646-C0CD-4D88-A41F-E2C6C7368DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA321646-C0CD-4D88-A41F-E2C6C7368DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA321646-C0CD-4D88-A41F-E2C6C7368DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA321646-C0CD-4D88-A41F-E2C6C7368DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{628BA874-9204-4C89-A84F-2561117A3CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{628BA874-9204-4C89-A84F-2561117A3CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{628BA874-9204-4C89-A84F-2561117A3CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{628BA874-9204-4C89-A84F-2561117A3CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A3B5D2E-CC6D-4571-875F-57FE3D706478}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A3B5D2E-CC6D-4571-875F-57FE3D706478}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A3B5D2E-CC6D-4571-875F-57FE3D706478}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A3B5D2E-CC6D-4571-875F-57FE3D706478}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
