@@ -8,7 +8,7 @@ namespace BurglarAlarm.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IWebHostEnvironment webHostEnvironment;
-
+        
         public HomeController(IWebHostEnvironment webHostEnvironment)
         {
             this.webHostEnvironment = webHostEnvironment;

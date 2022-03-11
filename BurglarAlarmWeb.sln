@@ -11,13 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarm.FaceDetection"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarm.Domain", "BurglarAlarm.Domain\BurglarAlarm.Domain.csproj", "{AC445C25-26F2-4ED4-9063-5997F7F6E3F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurglarAlarm.Web.Server", "BurglarAlarm.Web\Server\BurglarAlarm.Web.Server.csproj", "{DA321646-C0CD-4D88-A41F-E2C6C7368DC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarm.Web.Server", "BurglarAlarm.Web\Server\BurglarAlarm.Web.Server.csproj", "{DA321646-C0CD-4D88-A41F-E2C6C7368DC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurglarAlarm.Web.Client", "BurglarAlarm.Web\Client\BurglarAlarm.Web.Client.csproj", "{628BA874-9204-4C89-A84F-2561117A3CC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarm.Web.Client", "BurglarAlarm.Web\Client\BurglarAlarm.Web.Client.csproj", "{628BA874-9204-4C89-A84F-2561117A3CC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurglarAlarm.Service", "BurglarAlarm.Service\BurglarAlarm.Service.csproj", "{7A3B5D2E-CC6D-4571-875F-57FE3D706478}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarm.Service", "BurglarAlarm.Service\BurglarAlarm.Service.csproj", "{7A3B5D2E-CC6D-4571-875F-57FE3D706478}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurglarAlarm.ExternalService", "BurglarAlarm.ExternalService\BurglarAlarm.ExternalService.csproj", "{203665C5-8949-4072-88DB-062681E06A9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BurglarAlarm.ExternalService", "BurglarAlarm.ExternalService\BurglarAlarm.ExternalService.csproj", "{203665C5-8949-4072-88DB-062681E06A9C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{3D80C300-FD87-4C65-ABBC-83573E20CE2D}"
 EndProject
