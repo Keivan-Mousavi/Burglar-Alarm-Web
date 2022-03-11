@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BurglarAlarm.Domain\BurglarAlarm.Domain.csproj" />
     <ProjectReference Include="..\BurglarAlarm.ExternalService\BurglarAlarm.ExternalService.csproj" />
     <ProjectReference Include="..\BurglarAlarm.FaceDetection\BurglarAlarm.FaceDetection.csproj" />
   </ItemGroup>

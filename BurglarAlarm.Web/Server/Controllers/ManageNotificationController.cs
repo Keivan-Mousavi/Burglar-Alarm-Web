@@ -73,30 +73,7 @@ namespace BurglarAlarm.Web.Controllers
         [HttpGet(Name = "CheckCamera")]
         public async Task<bool> CheckCamera(string serial)
         {
-            await notificationService.SendNotification();
-
-            return await Task.Run(async () =>
-            {
-                try
-                {
-                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
-
-                    if (query != null)
-                    {
-                        query.StartDate = DateTime.Now.AddMinutes(10);
-                        await SendNotification();
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            });
+            return await notificationService.SendNotification(serial);
         }
 
         [HttpGet(Name = "CheckUploadImage")]

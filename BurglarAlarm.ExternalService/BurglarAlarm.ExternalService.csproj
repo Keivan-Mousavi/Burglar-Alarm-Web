@@ -5,4 +5,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BurglarAlarm.Domain\BurglarAlarm.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

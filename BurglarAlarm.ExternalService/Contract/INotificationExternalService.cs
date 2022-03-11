@@ -4,6 +4,6 @@ namespace BurglarAlarm.ExternalService.Contract
 {
     public interface INotificationExternalService
     {
-        Task SendNotification();
+        Task<bool> SendNotification(string serial);
     }
 }
