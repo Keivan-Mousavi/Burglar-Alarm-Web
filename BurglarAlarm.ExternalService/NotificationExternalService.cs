@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using BurglarAlarm.Domain.Common.AppSettings;
+using System.Reflection;
 
 namespace BurglarAlarm.ExternalService
 {
@@ -19,15 +20,11 @@ namespace BurglarAlarm.ExternalService
             {
                 try
                 {
-                    var configuration = new ConfigurationBuilder().SetBasePath("appsettings.json").Build().Get<AppSetting>();
+                    string? location = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                    var configuration = new ConfigurationBuilder().SetBasePath(location).AddJsonFile("appsettings.json").Build().Get<AppSetting>();
 
-                    foreach (var item in ListDeviceIdNotification.ListDeviceId)
+                    foreach (var deviceId in ListDeviceIdNotification.ListDeviceId)
                     {
-                        //var applicationID = "AAAAMxG6zms:APA91bGRhmkwYGbSkNidY3LaktNzIl9pmECjZJXY64R_i_7lFCE3f2-8xzN-VTwbpqValmNImz7-scqm2GEZACmayWzY5gNVqYg4qNuc4lfTv6XhQMF51BCfnXULYESWZTY42C1Yb01J";
-                        //var senderId = "219340787307";
-
-                        string deviceId = item;
-
                         WebRequest tRequest = WebRequest.Create(requestUriString: configuration.Notifications.URL);
                         tRequest.Method = "post";
                         tRequest.ContentType = "application/json";
