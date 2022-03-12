@@ -20,7 +20,7 @@ namespace BurglarAlarm.ExternalService
             {
                 try
                 {
-                    string? location = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                    string? location = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
                     var configuration = new ConfigurationBuilder().SetBasePath(location).AddJsonFile("appsettings.json").Build().Get<AppSetting>();
 
                     foreach (var deviceId in ListDeviceIdNotification.ListDeviceId)
