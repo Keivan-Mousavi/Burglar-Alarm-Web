@@ -1,31 +1,26 @@
 ﻿using BurglarAlarm.Domain.Common;
+using BurglarAlarm.Domain.Common.AppSettings;
 using BurglarAlarm.ExternalService.Contract;
 using System;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
-using Microsoft.Extensions.Configuration;
-using BurglarAlarm.Domain.Common.AppSettings;
-using System.Reflection;
+using System.Threading.Tasks;
 
 namespace BurglarAlarm.ExternalService
 {
     public class NotificationExternalService : INotificationExternalService
     {
-        public async Task<bool> SendNotification(string serial)
+        public async Task<bool> SendNotification(string serial, AppSetting appSetting)
         {
             return await Task.Run(() =>
             {
                 try
                 {
-                    string? location = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
-                    var configuration = new ConfigurationBuilder().SetBasePath(location).AddJsonFile("appsettings.json").Build().Get<AppSetting>();
-
                     foreach (var deviceId in ListDeviceIdNotification.ListDeviceId)
                     {
-                        WebRequest tRequest = WebRequest.Create(requestUriString: configuration.Notifications.URL);
+                        WebRequest tRequest = WebRequest.Create(requestUriString: appSetting.Notifications.URL);
                         tRequest.Method = "post";
                         tRequest.ContentType = "application/json";
 
@@ -44,8 +39,8 @@ namespace BurglarAlarm.ExternalService
 
                         Byte[] byteArray = Encoding.UTF8.GetBytes(json);
 
-                        tRequest.Headers.Add(string.Format("Authorization: key={0}", configuration.Notifications.ApplicationID));
-                        tRequest.Headers.Add(string.Format("Sender: id={0}", configuration.Notifications.SenderId));
+                        tRequest.Headers.Add(string.Format("Authorization: key={0}", appSetting.Notifications.ApplicationID));
+                        tRequest.Headers.Add(string.Format("Sender: id={0}", appSetting.Notifications.SenderId));
                         tRequest.ContentLength = byteArray.Length;
 
                         using (Stream dataStream = tRequest.GetRequestStream())

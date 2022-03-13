@@ -1,4 +1,5 @@
 ﻿using BurglarAlarm.Domain.Common;
+using BurglarAlarm.Domain.Common.AppSettings;
 using BurglarAlarm.ExternalService.Contract;
 using BurglarAlarm.Service.Contract;
 using System;
@@ -16,7 +17,7 @@ namespace BurglarAlarm.Service
             this.notificationExternalService = notificationExternalService;
         }
 
-        public async Task<bool> SendNotification(string serial)
+        public async Task<bool> SendNotification(string serial, AppSetting appSetting)
         {
             return await Task.Run(async () =>
             {
@@ -28,7 +29,7 @@ namespace BurglarAlarm.Service
                     {
                         query.StartDate = DateTime.Now.AddMinutes(10);
 
-                        return await notificationExternalService.SendNotification(serial);
+                        return await notificationExternalService.SendNotification(serial, appSetting);
                     }
                     else
                     {

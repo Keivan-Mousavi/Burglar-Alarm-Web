@@ -1,14 +1,12 @@
 ﻿using BurglarAlarm.Domain.Common;
+using BurglarAlarm.Domain.Common.AppSettings;
 using BurglarAlarm.Service.Component;
 using BurglarAlarm.Service.Contract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace BurglarAlarm.Web.Controllers
@@ -19,9 +17,13 @@ namespace BurglarAlarm.Web.Controllers
     {
         private readonly INotificationService notificationService;
 
-        public ManageNotificationController(INotificationService notificationService)
+        private readonly IConfiguration configuration;
+
+        public ManageNotificationController(INotificationService notificationService,
+                                            IConfiguration configuration)
         {
             this.notificationService = notificationService;
+            this.configuration = configuration;
         }
 
         [HttpPost(Name = "UploadImage")]
@@ -73,7 +75,9 @@ namespace BurglarAlarm.Web.Controllers
         [HttpGet(Name = "CheckCamera")]
         public async Task<bool> CheckCamera(string serial)
         {
-            return await notificationService.SendNotification(serial);
+            var appSetting = configuration.Get<AppSetting>();
+
+            return await notificationService.SendNotification(serial, appSetting);
         }
 
         [HttpGet(Name = "CheckUploadImage")]
