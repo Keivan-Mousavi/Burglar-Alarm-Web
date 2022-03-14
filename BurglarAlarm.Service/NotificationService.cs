@@ -42,5 +42,32 @@ namespace BurglarAlarm.Service
                 }
             });
         }
+
+        public async Task<string> UploadImage(string serial, string imageFile)
+        {
+            return await Task.Run(async() =>
+            {
+                try
+                {
+                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+
+                    if (query.StartDate >= DateTime.Now)
+                    {
+                        OnlineModel.Frame.Clear();
+                        OnlineModel.Frame.Append(imageFile);
+
+                        return "Success";
+                    }
+                    else
+                    {
+                        return "Faild";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            });
+        }
     }
 }

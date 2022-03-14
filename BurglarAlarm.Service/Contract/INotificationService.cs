@@ -6,5 +6,7 @@ namespace BurglarAlarm.Service.Contract
     public interface INotificationService
     {
         Task<bool> SendNotification(string serial, AppSetting appSetting);
+
+        Task<string> UploadImage(string serial, string imageFile);
     }
 }

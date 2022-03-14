@@ -29,31 +29,9 @@ namespace BurglarAlarm.Web.Controllers
         [HttpPost(Name = "UploadImage")]
         public async Task<string> UploadImage(IFormFile imageFile)
         {
-            return await Task.Run(() =>
-            {
-                try
-                {
-                    string serial = HttpContext.Request.Headers["Serial"];
+            string serial = HttpContext.Request.Headers["Serial"];
 
-                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
-
-                    if (query.StartDate >= DateTime.Now)
-                    {
-                        OnlineModel.Frame.Clear();
-                        OnlineModel.Frame.Append(imageFile.OpenReadStream().ConvertToBase64());
-
-                        return "Success";
-                    }
-                    else
-                    {
-                        return "Faild";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return "Error";
-                }
-            });
+            return await notificationService.UploadImage(serial, imageFile.OpenReadStream().ConvertToBase64());
         }
 
         [HttpGet(Name = "ShowFrame")]
