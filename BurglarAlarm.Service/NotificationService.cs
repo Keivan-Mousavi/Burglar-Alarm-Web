@@ -19,48 +19,38 @@ namespace BurglarAlarm.Service
 
         public async Task<bool> SendNotification(string serial, AppSetting appSetting)
         {
-            try
+            var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+
+            if (query is not null)
             {
-                var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+                query.StartDate = DateTime.Now.AddMinutes(10);
 
-                if (query != null)
-                {
-                    query.StartDate = DateTime.Now.AddMinutes(10);
-
-                    return await notificationExternalService.SendNotification(serial, appSetting);
-                }
-                else
-                {
-                    return false;
-                }
+                return await notificationExternalService.SendNotification(serial, appSetting);
             }
-            catch (Exception ex)
+            else
             {
-                return false;
+                throw new Exception(Errors.Device_Not_Register);
             }
         }
 
-        public async Task<string> UploadImage(string serial, string imageFile)
+        public string UploadImage(string serial, string imageFile)
         {
-            try
+            var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+
+            if (query is null)
             {
-                var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
-
-                if (query.StartDate >= DateTime.Now)
-                {
-                    OnlineModel.Frame.Clear();
-                    OnlineModel.Frame.Append(imageFile);
-
-                    return "Success";
-                }
-                else
-                {
-                    return "Faild";
-                }
+                throw new Exception(Errors.Device_Not_Register);
             }
-            catch (Exception ex)
+            if (query.StartDate >= DateTime.Now)
             {
-                return ex.Message;
+                OnlineModel.Frame.Clear();
+                OnlineModel.Frame.Append(imageFile);
+
+                return Errors.Success;
+            }
+            else
+            {
+                throw new Exception(Errors.Upload_Image_Expire_DateTime);
             }
         }
     }
