@@ -34,22 +34,6 @@ namespace BurglarAlarm.Web.Controllers
             return await notificationService.UploadImage(serial, imageFile.OpenReadStream().ConvertToBase64());
         }
 
-        [HttpGet(Name = "ShowFrame")]
-        public async Task<string> ShowFrame()
-        {
-            return await Task.Run(() =>
-            {
-                if (OnlineModel.Frame != null)
-                {
-                    return OnlineModel.Frame.ToString();
-                }
-                else
-                {
-                    return default;
-                }
-            });
-        }
-
         [HttpGet(Name = "CheckCamera")]
         public async Task<bool> CheckCamera(string serial)
         {
