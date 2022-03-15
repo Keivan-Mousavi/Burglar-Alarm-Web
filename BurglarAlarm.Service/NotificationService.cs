@@ -19,55 +19,49 @@ namespace BurglarAlarm.Service
 
         public async Task<bool> SendNotification(string serial, AppSetting appSetting)
         {
-            return await Task.Run(async () =>
+            try
             {
-                try
+                var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+
+                if (query != null)
                 {
-                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+                    query.StartDate = DateTime.Now.AddMinutes(10);
 
-                    if (query != null)
-                    {
-                        query.StartDate = DateTime.Now.AddMinutes(10);
-
-                        return await notificationExternalService.SendNotification(serial, appSetting);
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return await notificationExternalService.SendNotification(serial, appSetting);
                 }
-                catch (Exception ex)
+                else
                 {
                     return false;
                 }
-            });
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public async Task<string> UploadImage(string serial, string imageFile)
         {
-            return await Task.Run(async() =>
+            try
             {
-                try
-                {
-                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+                var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
 
-                    if (query.StartDate >= DateTime.Now)
-                    {
-                        OnlineModel.Frame.Clear();
-                        OnlineModel.Frame.Append(imageFile);
-
-                        return "Success";
-                    }
-                    else
-                    {
-                        return "Faild";
-                    }
-                }
-                catch (Exception ex)
+                if (query.StartDate >= DateTime.Now)
                 {
-                    return ex.Message;
+                    OnlineModel.Frame.Clear();
+                    OnlineModel.Frame.Append(imageFile);
+
+                    return "Success";
                 }
-            });
+                else
+                {
+                    return "Faild";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }
