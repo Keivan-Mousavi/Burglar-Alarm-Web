@@ -2,6 +2,7 @@
 using BurglarAlarm.Domain.Common.AppSettings;
 using BurglarAlarm.Service.Component;
 using BurglarAlarm.Service.Contract;
+using BurglarAlarm.Web.Server.Component;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -27,14 +28,15 @@ namespace BurglarAlarm.Web.Controllers
         }
 
         [HttpPost(Name = "UploadImage")]
-        public async Task<string> UploadImage(IFormFile imageFile)
+        public string UploadImage(IFormFile imageFile)
         {
             string serial = HttpContext.Request.Headers["Serial"];
 
-            return await notificationService.UploadImage(serial, imageFile.OpenReadStream().ConvertToBase64());
+            return notificationService.UploadImage(serial, imageFile.OpenReadStream().ConvertToBase64());
         }
 
         [HttpGet(Name = "CheckCamera")]
+        [IgnoreMiddleware(IgnoreMiddleware.Never)]
         public async Task<bool> CheckCamera(string serial)
         {
             var appSetting = configuration.Get<AppSetting>();
@@ -156,6 +158,13 @@ namespace BurglarAlarm.Web.Controllers
                     return false;
                 }
             });
+        }
+
+        [HttpGet(Name = "test")]
+        [IgnoreMiddleware(IgnoreMiddleware.Never)]
+        public string test()
+        {
+            return "salam";
         }
     }
 }

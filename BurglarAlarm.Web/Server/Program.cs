@@ -1,3 +1,4 @@
+using BurglarAlarm.Web.Server.Component;
 using BurglarAlarm.Web.Server.Registration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,5 +34,6 @@ app.UseRouting();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
+app.UseAOPMiddleware();
 
 app.Run();
