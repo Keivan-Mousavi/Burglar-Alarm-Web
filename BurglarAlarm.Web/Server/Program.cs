@@ -1,6 +1,7 @@
 using BurglarAlarm.Web.Server.Component;
 using BurglarAlarm.Web.Server.Registration;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,6 +12,15 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddServiceRegistration();
 builder.Services.AddExternalServiceRegistration();
+
+builder.Services.Configure<KestrelServerOptions>(options =>
+{
+    options.AllowSynchronousIO = true;
+});
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.AllowSynchronousIO = true;
+});
 
 var app = builder.Build();
 
