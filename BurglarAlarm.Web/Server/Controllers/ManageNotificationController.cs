@@ -159,12 +159,5 @@ namespace BurglarAlarm.Web.Controllers
                 }
             });
         }
-
-        [HttpGet(Name = "test")]
-        [IgnoreMiddleware(IgnoreMiddleware.Never)]
-        public string test()
-        {
-            return "salam";
-        }
     }
 }
