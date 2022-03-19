@@ -17,6 +17,37 @@ namespace BurglarAlarm.Service
             this.notificationExternalService = notificationExternalService;
         }
 
+        public async Task<bool> CheckUploadImage(string serial)
+        {
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+
+                    if (query != null)
+                    {
+                        if (query.StartDate >= DateTime.Now)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            });
+        }
+
         public async Task<bool> SendNotification(string serial, AppSetting appSetting)
         {
             var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();

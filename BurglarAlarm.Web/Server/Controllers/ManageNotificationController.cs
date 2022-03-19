@@ -47,33 +47,7 @@ namespace BurglarAlarm.Web.Controllers
         [HttpGet(Name = "CheckUploadImage")]
         public async Task<bool> CheckUploadImage(string serial)
         {
-            return await Task.Run(() =>
-            {
-                try
-                {
-                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
-
-                    if (query != null)
-                    {
-                        if (query.StartDate >= DateTime.Now)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            });
+            return await notificationService.CheckUploadImage(serial);
         }
 
         [HttpGet(Name = "ControllerTV")]
