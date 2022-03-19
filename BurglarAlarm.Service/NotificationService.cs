@@ -64,25 +64,35 @@ namespace BurglarAlarm.Service
             }
         }
 
-        public string UploadImage(string serial, string imageFile)
+        public async Task<string> UploadImage(string serial, string imageFile)
         {
-            var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
 
-            if (query is null)
-            {
-                throw new Exception(Errors.Device_Not_Register);
-            }
-            if (query.StartDate >= DateTime.Now)
-            {
-                OnlineModel.Frame.Clear();
-                OnlineModel.Frame.Append(imageFile);
+                    if (query is null)
+                    {
+                        throw new Exception(Errors.Device_Not_Register);
+                    }
+                    if (query.StartDate >= DateTime.Now)
+                    {
+                        OnlineModel.Frame.Clear();
+                        OnlineModel.Frame.Append(imageFile);
 
-                return Errors.Success;
-            }
-            else
-            {
-                throw new Exception(Errors.Upload_Image_Expire_DateTime);
-            }
+                        return Errors.Success;
+                    }
+                    else
+                    {
+                        throw new Exception(Errors.Upload_Image_Expire_DateTime);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            });
         }
     }
 }
