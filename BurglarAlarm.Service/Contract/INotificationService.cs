@@ -10,5 +10,7 @@ namespace BurglarAlarm.Service.Contract
         Task<string> UploadImage(string serial, string imageFile);
 
         Task<bool> CheckUploadImage(string serial);
+
+        Task<string> ControllerTV(string serial);
     }
 }

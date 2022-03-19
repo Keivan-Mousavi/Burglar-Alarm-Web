@@ -28,11 +28,11 @@ namespace BurglarAlarm.Web.Controllers
         }
 
         [HttpPost(Name = "UploadImage")]
-        public string UploadImage(IFormFile imageFile)
+        public async Task<string> UploadImage(IFormFile imageFile)
         {
             string serial = HttpContext.Request.Headers["Serial"];
 
-            return notificationService.UploadImage(serial, imageFile.OpenReadStream().ConvertToBase64());
+            return await notificationService.UploadImage(serial, imageFile.OpenReadStream().ConvertToBase64());
         }
 
         [HttpGet(Name = "CheckCamera")]
@@ -45,38 +45,12 @@ namespace BurglarAlarm.Web.Controllers
         }
 
         [HttpGet(Name = "CheckUploadImage")]
-        public async Task<bool> CheckUploadImage(string serial)
-        {
-            return await notificationService.CheckUploadImage(serial);
-        }
+        public async Task<bool> CheckUploadImage(string serial) =>
+             await notificationService.CheckUploadImage(serial);
 
         [HttpGet(Name = "ControllerTV")]
-        public async Task<string> ControllerTV(string serial)
-        {
-            return await Task.Run(() =>
-            {
-                try
-                {
-                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
-
-                    var dt = DateTime.Now;
-
-                    if (query.Serial == serial && query.StartDate >= dt)
-                    {
-                        var lcm = ListControllerModel.ListController.FirstOrDefault(f => f.Serial == serial);
-                        ListControllerModel.ListController.Remove(lcm);
-
-                        return lcm.SendNEC;
-                    }
-
-                    return "not_find_this_device";
-                }
-                catch (Exception ex)
-                {
-                    return "error";
-                }
-            });
-        }
+        public async Task<string> ControllerTV(string serial) =>
+             await notificationService.ControllerTV(serial);
 
         [HttpGet(Name = "AddControllerTV")]
         public async Task<bool> AddControllerTV(string serial, string sendNEC)

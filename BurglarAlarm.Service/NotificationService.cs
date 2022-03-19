@@ -48,6 +48,44 @@ namespace BurglarAlarm.Service
             });
         }
 
+        public async Task<string> ControllerTV(string serial)
+        {
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
+
+                    var dt = DateTime.Now;
+
+                    if (query is null)
+                    {
+                        return Errors.Not_Find_This_Device;
+                    }
+                    if (query.Serial == serial && query.StartDate >= dt)
+                    {
+                        var lcm = ListControllerModel.ListController.FirstOrDefault(f => f.Serial == serial);
+                        if (lcm is null)
+                        {
+                            return Errors.Not_Find_List_Controller;
+                        }
+
+                        ListControllerModel.ListController.Remove(lcm);
+
+                        return lcm.SendNEC;
+                    }
+                    else
+                    {
+                        return Errors.Not_Find_This_Device;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            });
+        }
+
         public async Task<bool> SendNotification(string serial, AppSetting appSetting)
         {
             var query = WarningListModel.ListModels.Where(w => w.Serial == serial).FirstOrDefault();
