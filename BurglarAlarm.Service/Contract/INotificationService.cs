@@ -12,5 +12,7 @@ namespace BurglarAlarm.Service.Contract
         Task<bool> CheckUploadImage(string serial);
 
         Task<string> ControllerTV(string serial);
+
+        Task<bool> AddControllerTV(string serial, string sendNEC);
     }
 }

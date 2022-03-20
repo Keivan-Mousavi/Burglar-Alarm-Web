@@ -17,6 +17,27 @@ namespace BurglarAlarm.Service
             this.notificationExternalService = notificationExternalService;
         }
 
+        public async Task<bool> AddControllerTV(string serial, string sendNEC)
+        {
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    ListControllerModel.ListController.Add(new ControllerModel
+                    {
+                        SendNEC = sendNEC,
+                        Serial = serial
+                    });
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            });
+        }
+
         public async Task<bool> CheckUploadImage(string serial)
         {
             return await Task.Run(() =>

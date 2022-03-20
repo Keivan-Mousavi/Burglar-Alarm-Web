@@ -53,26 +53,8 @@ namespace BurglarAlarm.Web.Controllers
              await notificationService.ControllerTV(serial);
 
         [HttpGet(Name = "AddControllerTV")]
-        public async Task<bool> AddControllerTV(string serial, string sendNEC)
-        {
-            return await Task.Run(() =>
-            {
-                try
-                {
-                    ListControllerModel.ListController.Add(new ControllerModel
-                    {
-                        SendNEC = sendNEC,
-                        Serial = serial
-                    });
-
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-            });
-        }
+        public async Task<bool> AddControllerTV(string serial, string sendNEC)=>
+            await notificationService.AddControllerTV(serial, sendNEC);
 
         [HttpGet(Name = "ListAllControllerTV")]
         public async Task<string> ListAllControllerTV(string serial)
