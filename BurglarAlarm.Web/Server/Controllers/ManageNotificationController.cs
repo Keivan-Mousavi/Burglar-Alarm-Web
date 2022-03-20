@@ -53,7 +53,7 @@ namespace BurglarAlarm.Web.Controllers
              await notificationService.ControllerTV(serial);
 
         [HttpGet(Name = "AddControllerTV")]
-        public async Task<bool> AddControllerTV(string serial, string sendNEC)=>
+        public async Task<bool> AddControllerTV(string serial, string sendNEC) =>
             await notificationService.AddControllerTV(serial, sendNEC);
 
         [HttpGet(Name = "ListAllControllerTV")]
@@ -61,24 +61,7 @@ namespace BurglarAlarm.Web.Controllers
             await notificationService.ListAllControllerTV(serial);
 
         [HttpGet(Name = "AddDeviceIdNotification")]
-        public async Task<bool> AddDeviceIdNotification(string key)
-        {
-            return await Task.Run(() =>
-            {
-                try
-                {
-                    if (!ListDeviceIdNotification.ListDeviceId.Any(a => a == key))
-                    {
-                        ListDeviceIdNotification.ListDeviceId.Add(key);
-                    }
-
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            });
-        }
+        public async Task<bool> AddDeviceIdNotification(string key) =>
+            await notificationService.AddDeviceIdNotification(key);
     }
 }

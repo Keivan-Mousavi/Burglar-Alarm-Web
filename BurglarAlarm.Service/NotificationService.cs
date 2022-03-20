@@ -38,6 +38,26 @@ namespace BurglarAlarm.Service
             });
         }
 
+        public async Task<bool> AddDeviceIdNotification(string key)
+        {
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    if (!ListDeviceIdNotification.ListDeviceId.Any(a => a == key))
+                    {
+                        ListDeviceIdNotification.ListDeviceId.Add(key);
+                    }
+
+                    return true;
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            });
+        }
+
         public async Task<bool> CheckUploadImage(string serial)
         {
             return await Task.Run(() =>

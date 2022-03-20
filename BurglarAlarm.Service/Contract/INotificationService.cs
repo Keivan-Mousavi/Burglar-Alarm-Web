@@ -16,5 +16,7 @@ namespace BurglarAlarm.Service.Contract
         Task<bool> AddControllerTV(string serial, string sendNEC);
 
         Task<string> ListAllControllerTV(string serial);
+
+        Task<bool> AddDeviceIdNotification(string key);
     }
 }
